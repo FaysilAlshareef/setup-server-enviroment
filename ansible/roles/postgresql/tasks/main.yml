@@ -1,0 +1,42 @@
+- name: Pull the PostgreSQL Docker image
+  docker_image:
+    name: "{{ postgresql_image }}"
+    tag: "{{ postgresql_image_tag }}"
+    source: pull
+
+- name: Create a Docker volume for PostgreSQL data
+  docker_volume:
+    name: "{{ postgresql_volume }}"
+    state: present
+
+- name: Create a Docker network for PostgreSQL
+  docker_network:
+    name: postgres_network
+    state: present
+
+- name: Run PostgreSQL container
+  docker_container:
+    name: "{{ postgresql_container_name }}"
+    image: "{{ postgresql_image }}"
+    state: started
+    restart_policy: always
+    networks:
+      - name: postgres_network
+    env:
+      POSTGRES_USER: "{{ postgres_user }}"
+      POSTGRES_PASSWORD: "{{ postgres_password }}"
+    published_ports:
+      - "{{ postgresql_port }}:5432"
+    volumes:
+      - "{{ postgresql_volume }}:/var/lib/postgresql/data"
+
+- name: Ensure PostgreSQL container is running
+  docker_container:
+    name: "{{ postgresql_container_name }}"
+    state: started
+
+- name: Wait for PostgreSQL to be ready
+  wait_for:
+    port: "{{ postgresql_port }}"
+    delay: 10
+    timeout: 60

@@ -1,0 +1,6 @@
+- hosts: all
+  become: true
+  tasks:
+    - include_tasks: base-setup.yml
+    - include_tasks: docker-setup.yml
+    - include_tasks: postgresql-setup.yml

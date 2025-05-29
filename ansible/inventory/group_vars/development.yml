@@ -1,0 +1,7 @@
+postgresql_image: postgres
+postgresql_image_tag: latest
+postgresql_container_name: dev_postgres
+postgresql_port: 5432
+postgresql_volume: dev_postgres_data
+debug_mode: true
+ansible_ssh_private_key_file: ~/.ssh/aws.pem

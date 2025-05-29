@@ -1,0 +1,8 @@
+- name: Restart PostgreSQL container
+  docker_container:
+    name: postgres
+    state: restarted
+  when: postgres_container_changed
+
+- name: Notify PostgreSQL container restart
+  meta: flush_handlers

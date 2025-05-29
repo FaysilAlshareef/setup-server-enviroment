@@ -1,0 +1,32 @@
+- name: Update apt repository and install common packages
+  apt:
+    update_cache: yes
+    name:
+      - vim
+      - curl
+      - git
+    state: present
+
+- name: Set timezone
+  command: timedatectl set-timezone UTC
+
+- name: Ensure UFW is installed
+  apt:
+    name: ufw
+    state: present
+
+- name: Allow OpenSSH through UFW
+  ufw:
+    rule: allow
+    name: OpenSSH
+
+- name: Enable UFW
+  ufw:
+    state: enabled
+
+- name: Create a user for deployment
+  user:
+    name: deploy
+    shell: /bin/bash
+    groups: sudo
+    state: present

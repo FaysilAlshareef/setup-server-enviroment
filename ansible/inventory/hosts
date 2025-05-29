@@ -1,0 +1,8 @@
+[all]
+dev-server
+
+[development]
+dev-server
+
+[production]
+prod-server

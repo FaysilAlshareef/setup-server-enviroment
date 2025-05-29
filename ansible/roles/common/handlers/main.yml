@@ -1,0 +1,11 @@
+- name: Restart PostgreSQL container
+  service:
+    name: postgresql
+    state: restarted
+  when: postgresql_container_changed
+
+- name: Notify Docker to restart
+  docker_container:
+    name: postgres
+    state: restarted
+  when: docker_container_changed

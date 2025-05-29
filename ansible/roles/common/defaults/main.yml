@@ -1,0 +1,5 @@
+default_variables: 
+debug_mode: false
+server_name: "common-server"
+timezone: "UTC"
+locale: "en_US.UTF-8"

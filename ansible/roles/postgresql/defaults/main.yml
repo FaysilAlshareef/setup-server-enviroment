@@ -1,0 +1,8 @@
+# PostgreSQL default credentials
+postgres_user: postgres
+postgres_password: securepassword
+postgresql_image: postgres
+postgresql_image_tag: latest
+postgresql_container_name: postgres
+postgresql_port: 5432
+postgresql_volume: postgres_data

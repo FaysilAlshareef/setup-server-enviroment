@@ -1,0 +1,3 @@
+- name: Setup PostgreSQL as a Docker container
+  import_role:
+    name: postgresql
